@@ -1,0 +1,12 @@
+#root {
+	max-width: 1280px;
+	margin: 0 auto;
+	padding: 2rem;
+	text-align: center;
+}
+
+pre {
+	display: inline;
+	margin: 0;
+	white-space: pre-wrap;
+}
