@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import "./App.css";
 import { useAuth0 } from "@auth0/auth0-react";
+import Selector from "./Selector";
 
 const App = () => {
 	const [token, setToken] = useState(null);
+	const [idp, setIdp] = useState("Cognito");
 	const auth = useAuth0();
 
 	async function getToken(auth) {
@@ -34,14 +36,16 @@ const App = () => {
 		<div
 			style={{
 				display: "flex",
-				flexDirection: "row",
+				flexDirection: "column",
 				gap: "2rem",
 				width: "100%",
-				height: "100vh",
+				height: "50vh",
 				alignItems: "center",
-				justifyContent: "center",
+				justifyContent: "space-around",
 			}}
 		>
+			<Selector idp={idp} setIdp={setIdp} />
+
 			{auth.isAuthenticated ? (
 				<div
 					style={{

@@ -13,8 +13,10 @@
 	},
 	"dependencies": {
 		"@auth0/auth0-react": "^2.2.4",
+		"oidc-client-ts": "^3.1.0",
 		"react": "^19.0.0",
-		"react-dom": "^19.0.0"
+		"react-dom": "^19.0.0",
+		"react-oidc-context": "^3.2.0"
 	},
 	"devDependencies": {
 		"@biomejs/biome": "^1.9.4",

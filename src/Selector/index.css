@@ -1,0 +1,6 @@
+form > div > label {
+	display: inline-block;
+	text-align: left;
+	width: 50px;
+	margin-left: 10px;
+}
