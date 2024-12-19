@@ -1,15 +1,28 @@
-import { useAuth } from "react-oidc-context";
+import { useEffect, useState } from "react";
 import "./App.css";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const App = () => {
-	const auth = useAuth();
+	const [token, setToken] = useState(null);
+	const auth = useAuth0();
+
+	async function getToken(auth) {
+		if ("getAccessTokenSilently" in auth) {
+			const token = await auth?.getAccessTokenSilently();
+			setToken(token);
+		}
+	}
+
+	useEffect(() => {
+		getToken(auth);
+	}, [auth]);
 
 	if (auth.isLoading) {
 		return <div>Loading...</div>;
 	}
 
 	if (auth.error) {
-		return <div>Encountering error... {auth.error.message}</div>;
+		return <div>Encountered error... {auth.error.message}</div>;
 	}
 
 	const buttonStyle = {
@@ -39,16 +52,14 @@ const App = () => {
 						width: "900px",
 					}}
 				>
-					User: <pre>{auth.user?.profile.email} </pre>
-					ID Token: <pre>{auth.user?.id_token} </pre>
-					Access Token<pre>{auth.user?.access_token} </pre>
-					Refresh Token: <pre>{auth.user?.refresh_token} </pre>
-					<button style={buttonStyle} onClick={() => auth.removeUser()}>
+					User: <pre>{auth.user?.email} </pre>
+					Access Token<pre>{token} </pre>
+					<button style={buttonStyle} onClick={() => auth.logout()}>
 						Sign out
 					</button>
 				</div>
 			) : (
-				<button style={buttonStyle} onClick={() => auth.signinRedirect()}>
+				<button style={buttonStyle} onClick={() => auth.loginWithRedirect()}>
 					Sign in
 				</button>
 			)}
