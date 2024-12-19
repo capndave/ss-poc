@@ -10,3 +10,8 @@ pre {
 	margin: 0;
 	white-space: pre-wrap;
 }
+
+button {
+	width: 100px;
+	height: 40px;
+}
